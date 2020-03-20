@@ -1,0 +1,28 @@
+{% extends parent_templates|default:"blog/base_blog.html" %}
+
+{% block title %}
+	{{ block.super }} - Posts
+{% endblock %}
+
+{% block content %}
+	{% for post in posts %}
+		<article>
+			<header>
+				<h2>
+					<a href="{% url 'post-detail' post.slug %}">{{ post.title|title }}</a>
+				</h2>
+				<p>
+					Written on: <time datetime="{{ post.pub_date|date:'l, F j, Y' }}">{{ post.pub_date|date:'l, F j, Y' }}</time>
+				</p>
+			</header>
+			<p>
+				{{ post.text|truncatewords:20}}
+			</p>
+			<p>
+				<a href="{% url 'post-detail' post.slug %}">Read more&hellip;</a>
+			</p>
+		</article>
+	{% empty %}
+		<p><em>No blog posts available</em></p>
+	{% endfor %}
+{% endblock %}
