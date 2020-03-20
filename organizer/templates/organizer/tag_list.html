@@ -1,0 +1,20 @@
+{% extends parent_templates|default:"organizer/base_organizer.html" %}
+
+{% block title %}
+	{{ block.super }} - Tag List
+{% endblock %}
+
+{% block content %}
+		<h2>Tag List</h2>
+		<ul>
+			{% for tag in tags %}
+				<li>
+					<a href="{% url 'tag-details' tag.slug %}">{{ tag.name|title }}</a>
+				</li>
+			{% empty %}
+				<p>
+					<em>There are currently no Tags available</em>
+				</p>
+			{% endfor %}
+		</ul>
+{% endblock %}
